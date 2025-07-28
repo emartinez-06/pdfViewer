@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pdf-viewer-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - pdf-viewer-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pdf-viewer-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - pdf-viewer-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Database service (uncomment if needed)
+  # database:
+  #   image: postgres:15-alpine
+  #   container_name: pdf-viewer-db
+  #   environment:
+  #     - POSTGRES_DB=pdfviewer
+  #     - POSTGRES_USER=pdfuser
+  #     - POSTGRES_PASSWORD=pdfpassword
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - pdf-viewer-network
+  #   restart: unless-stopped
+
+networks:
+  pdf-viewer-network:
+    driver: bridge
+
+volumes:
+  # Uncomment if using database
+  # postgres_data:
