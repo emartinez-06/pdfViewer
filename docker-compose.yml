@@ -1,6 +1,29 @@
 version: '3.8'
 
 services:
+  # Python PDF Processing Service
+  pdf-processor:
+    build:
+      context: ./python_service
+      dockerfile: Dockerfile
+    container_name: pdf-viewer-processor
+    ports:
+      - "5001:5000"
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      - ./python_service/uploads:/app/uploads
+      - ./python_service/processed:/app/processed
+    networks:
+      - pdf-viewer-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   # Backend API Service
   backend:
     build:
@@ -14,6 +37,8 @@ services:
       - PORT=3001
     volumes:
       - ./backend/uploads:/app/uploads
+    depends_on:
+      - pdf-processor
     networks:
       - pdf-viewer-network
     restart: unless-stopped
@@ -34,6 +59,7 @@ services:
       - "80:80"
     depends_on:
       - backend
+      - pdf-processor
     networks:
       - pdf-viewer-network
     restart: unless-stopped
@@ -65,6 +91,6 @@ networks:
   pdf-viewer-network:
     driver: bridge
 
-volumes:
+# volumes:
   # Uncomment if using database
   # postgres_data:

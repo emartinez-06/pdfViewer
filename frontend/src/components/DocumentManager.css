@@ -1,0 +1,274 @@
+.document-manager {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.manager-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.manager-header h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.manager-header p {
+  color: #7f8c8d;
+  font-size: 16px;
+}
+
+.upload-section {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-box {
+  text-align: center;
+  padding: 40px;
+  border: 2px dashed #3498db;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.upload-box:hover {
+  border-color: #2980b9;
+  background-color: #e3f2fd;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-label {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-bottom: 10px;
+}
+
+.upload-label:hover {
+  background-color: #2980b9;
+}
+
+.upload-label:active {
+  transform: translateY(1px);
+}
+
+.upload-hint {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.merge-section {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.merge-section p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  color: #856404;
+}
+
+.merge-btn {
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+  transition: background-color 0.2s;
+}
+
+.merge-btn:hover:not(:disabled) {
+  background-color: #e67e22;
+}
+
+.merge-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.clear-selection-btn {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clear-selection-btn:hover {
+  background-color: #7f8c8d;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.no-documents {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+}
+
+.no-documents p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.document-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.document-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.document-card.selected {
+  border-color: #f39c12;
+  background-color: #fef9e7;
+}
+
+.document-info {
+  margin-bottom: 15px;
+}
+
+.document-title {
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  word-break: break-word;
+}
+
+.document-pages {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.document-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 60px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+.view-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.view-btn:hover {
+  background-color: #2980b9;
+}
+
+.download-btn {
+  background-color: #27ae60;
+  color: white;
+}
+
+.download-btn:hover {
+  background-color: #229954;
+}
+
+.select-btn {
+  background-color: #f39c12;
+  color: white;
+}
+
+.select-btn:hover {
+  background-color: #e67e22;
+}
+
+.select-btn.selected {
+  background-color: #e67e22;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .document-manager {
+    padding: 15px;
+  }
+  
+  .documents-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .upload-box {
+    padding: 30px 20px;
+  }
+  
+  .document-actions {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    flex: none;
+  }
+  
+  .merge-section {
+    padding: 12px;
+  }
+  
+  .merge-btn,
+  .clear-selection-btn {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+  }
+}

@@ -1,35 +1,22 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.app-header {
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
-}
-
-.app-header h1 {
-  margin: 0 0 10px 0;
-  font-size: 2.5rem;
-}
-
-.app-header p {
+body {
   margin: 0;
-  opacity: 0.8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa;
+}
+
+.App {
+  min-height: 100vh;
 }
 
 .home-page {
   min-height: 100vh;
-}
-
-.upload-section {
-  padding: 40px 20px;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.upload-section p {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 30px;
+  background-color: #f8f9fa;
 }

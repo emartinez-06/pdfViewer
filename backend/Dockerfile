@@ -12,6 +12,9 @@ RUN npm ci --only=production
 # Copy source code
 COPY . .
 
+# Install curl for health checks (before switching to non-root user)
+RUN apk add --no-cache curl
+
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nodejs -u 1001
@@ -22,9 +25,6 @@ USER nodejs
 
 # Expose port
 EXPOSE 3001
-
-# Install curl for health checks
-RUN apk add --no-cache curl
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
